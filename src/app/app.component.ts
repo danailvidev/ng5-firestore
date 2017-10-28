@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 export class AppComponent implements OnInit {
   coursesCollection: AngularFirestoreCollection<any[]>;
   courses: Observable<any[]>;
+  snapshot: any;
 
   constructor(private db: AngularFirestore) { }
 
@@ -19,6 +20,13 @@ export class AppComponent implements OnInit {
       return ref.orderBy('name', 'asc');
     });
     this.courses = this.coursesCollection.valueChanges();
+    this.snapshot = this.coursesCollection.snapshotChanges()
+      .map(arr => {
+        return arr.map(snap => {
+          //console.log(snap.payload.doc.data());
+          return snap.payload.doc.id;
+        });
+      });
   }
 
 
