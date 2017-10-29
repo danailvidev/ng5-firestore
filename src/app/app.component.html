@@ -6,5 +6,12 @@
 <!-- <h1>{{snapshot | async }}</h1> -->
 <h1>test</h1>
 <ul>
-  <li *ngFor="let asd of snapshot | async">{{asd}}</li>
+  <li *ngFor="let asd of snapshot | async">{{asd | json}}</li>
 </ul>
+
+<button (click)="getCourses('desc')">desc</button>
+<button (click)="test()">asc</button>
+<hr>
+<h1>{{course | async | json}}</h1>
+<input [(ngModel)]="newContent">
+<button (click)="updateContent()">updateContent</button>
